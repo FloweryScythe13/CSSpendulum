@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<!--
+Created using JS Bin
+http://jsbin.com
+
+Copyright (c) 2016 by FloweryScythe13 (http://jsbin.com/fokiqu/1/edit)
+
+Released under the MIT license: http://jsbin.mit-license.org
+-->
+<meta name="robots" content="noindex">
+<html>
+<head>
+<meta name="description" content="This was a small project with the aim of recreating a pendulum's motion using CSS3 animations.">
+  <meta charset="utf-8">
+  <title>Physics Pendulum in CSS3</title>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<style id="jsbin-css">
+#string {
+  
+  width: 5px;
+  height: 150px;
+  background-color: black;
+  margin-left: calc(50% - 2px);
+  margin-top: 20%;
+  
+}
+
+#mass {
+  width: 50px;
+  height: 50px;
+  background-image: radial-gradient(white, gray);
+  border-radius: 50px;
+  -moz-border-radius: 50px;
+  -webkit-border-radius: 50px;
+  margin-left: auto;
+  margin-right: auto;
+  
+}
+
+.pcontainer {
+  transform: rotate(35deg);
+  animation-name: oscillate;
+  animation-duration: 5s;
+  animation-timing-function: ease-in-out;
+  animation-delay: none;
+  animation-iteration-count: 25;
+  animation-fill-mode: none;
+  animation-direction: alternate;
+  animation-play-state: running;
+  
+}
+
+
+
+@keyframes oscillate {
+  0% {
+    transform: rotate(35deg);
+    transform-origin: top center;
+  }
+  100% {
+    transform: rotate(-35deg);
+    transform-origin: top center;
+  }  
+}
+
+input {
+  margin-top: 15px;
+}
+
+button {
+  margin-right: 10px;
+}
+
+
+#buttons {
+  position: absolute;
+  z-index: 15;
+  top: 20%
+}
+</style>
+</head>
+<body>
+  <h2>A Simple Pendulum in CSS3 by Eric Brichetto</h2>
+  <h5>Adjust the size in pixels of the spherical mass using the input field below. When you are ready, press the Start button to begin the animation.
+  <div id="pcontainer" class = "">
+    <div id="string">
+      
+    </div>
+    <div id="mass"></div>
+  </div>
+    <div id="buttons">
+  <input id="msize"><button id="msize-b" type="button" value="">Mass radius (default 50)</button></input>
+  
+<button id="pause">Pause/Resume</button>
+<button id="start">Start</button>
+<button id="stop">Stop</button>
+    </div>
+<script id="jsbin-javascript">
+$(document).ready(function() {
+  var r = 0;
+
+
+  var container = document.getElementById("pcontainer");
+  var rbutton = document.getElementById("msize-b");
+  var pause = document.getElementById("pause");
+  var start = document.getElementById("start");
+  var stop = document.getElementById("stop");
+  var mass = document.getElementById("mass");
+  var string = document.getElementById("string");
+
+  rbutton.onclick = function() {
+    r = document.getElementById("msize").value;
+    console.log("Radius is now " + r + ".");
+    $("#mass").css("width", r + "px");
+    $("#mass").css("height", r + "px");
+  };
+
+
+  pause.onclick = function() {
+    if(container.style.webkitAnimationPlayState === "running" || container.style.webkitAnimationPlayState === "") {
+   container.style.webkitAnimationPlayState = "paused";
+    }
+    else if (container.style.webkitAnimationPlayState === "paused") {
+      container.style.webkitAnimationPlayState = "running";
+    }
+  };
+
+  start.onclick = function() {    $("#pcontainer").addClass("pcontainer");
+  };
+
+  stop.onclick = function() {    $("#pcontainer").removeClass("pcontainer");
+  };
+
+});
+</script>
+</body>
+</html>
